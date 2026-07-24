@@ -119,27 +119,69 @@
             isolation: isolate;
         }
 
-        /* Safari needs explicit -webkit- prefixes for 3D properties */
-        .card-inner {
-            -webkit-transform-style: preserve-3d;
-            transform-style: preserve-3d;
+        /* All flip logic is handled by JavaScript — no CSS hover transforms */
+        .card-inner.flipped {
+            transform: rotateY(180deg) !important;
         }
 
-        .card-inner>div {
+        /* Keep nav above 3D card layers without entering 3D space itself */
+        nav {
+            position: fixed;
+            z-index: 9999;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            will-change: transform;
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
         }
 
-        /* All flip logic is handled by JavaScript — no CSS hover transforms */
-        .card-inner.flipped {
-            -webkit-transform: rotateY(180deg);
-            transform: rotateY(180deg) !important;
-        }
+        /* On touch devices, mobile WebKit/Chrome can mis-assign GPU compositing
+           layers when many 3D perspective/preserve-3d contexts sit near a
+           position:fixed element — the fixed nav visually gets swept along
+           with whichever card is mid-rotation. Rather than fight that bug,
+           disable the 3D rotateY flip entirely on touch and use a simple
+           crossfade instead. Desktop hover-flip is untouched. */
+        @media (hover: none) and (pointer: coarse) {
+            .project-card {
+                perspective: none;
+            }
 
-        /* Force nav onto its own GPU layer so card 3D flips don't affect it */
-        nav {
-            -webkit-transform: translateZ(0);
-            transform: translateZ(0);
+            .card-inner {
+                -webkit-transform-style: flat !important;
+                transform-style: flat !important;
+                -webkit-transform: none !important;
+                transform: none !important;
+                transition: none !important;
+            }
+
+            .card-inner>div {
+                -webkit-backface-visibility: visible !important;
+                backface-visibility: visible !important;
+                -webkit-transform: none !important;
+                transform: none !important;
+                transition: opacity 0.35s ease, visibility 0.35s ease;
+            }
+
+            /* Back face sits on top, hidden until flipped */
+            .card-inner>div:last-child {
+                position: absolute;
+                inset: 0;
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+            }
+
+            .card-inner.flipped>div:first-child {
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+            }
+
+            .card-inner.flipped>div:last-child {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+            }
         }
     </style>
 </head>
