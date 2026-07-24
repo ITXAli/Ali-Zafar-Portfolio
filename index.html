@@ -119,20 +119,27 @@
             isolation: isolate;
         }
 
+        /* Safari needs explicit -webkit- prefixes for 3D properties */
+        .card-inner {
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+        }
+
+        .card-inner>div {
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
         /* All flip logic is handled by JavaScript — no CSS hover transforms */
         .card-inner.flipped {
+            -webkit-transform: rotateY(180deg);
             transform: rotateY(180deg) !important;
         }
 
-        /* Keep nav above 3D card layers without entering 3D space itself */
+        /* Force nav onto its own GPU layer so card 3D flips don't affect it */
         nav {
-            position: fixed;
-            z-index: 9999;
             -webkit-transform: translateZ(0);
             transform: translateZ(0);
-            will-change: transform;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
         }
     </style>
 </head>
