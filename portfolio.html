@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ali Zafar | AI Automation Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* Custom Fonts */
+        .font-cinzel {
+            font-family: 'Cinzel', serif;
+        }
+
+        .font-inter {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Seamless blending to remove jpeg background blocks */
+        .blend-lighten {
+            mix-blend-mode: lighten;
+        }
+
+        /* Scroll Reveal Utility */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered project delays for a cascading entrance effect */
+        @media (min-width: 1280px) {
+            .project-card:nth-child(3n+1) {
+                transition-delay: 0ms;
+            }
+
+            .project-card:nth-child(3n+2) {
+                transition-delay: 150ms;
+            }
+
+            .project-card:nth-child(3n+3) {
+                transition-delay: 300ms;
+            }
+        }
+
+        @media (min-width: 1024px) and (max-width: 1279px) {
+            .project-card:nth-child(2n+1) {
+                transition-delay: 0ms;
+            }
+
+            .project-card:nth-child(2n+2) {
+                transition-delay: 150ms;
+            }
+        }
+
+        /* Custom Keyframes */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Flash Card Hover Effect */
+        @keyframes flashSweep {
+            0% {
+                left: -100%;
+            }
+
+            100% {
+                left: 200%;
+            }
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transform: skewX(-20deg);
+            z-index: 20;
+            pointer-events: none;
+        }
+
+        .project-card:hover::before {
+            animation: flashSweep 1.2s ease-out;
+        }
+    </style>
+</head>
+
+<body class="relative min-h-screen w-full overflow-x-hidden bg-black selection:bg-emerald-500/30 text-gray-200">
+
+    <!-- Global Emerald Tracker Glow -->
+    <div id="global-glow" class="fixed inset-0 pointer-events-none z-[999] opacity-0 transition-opacity duration-300"
+        style="background: radial-gradient(circle 600px at 50% 50%, rgba(16, 185, 129, 0.22), transparent 75%); mix-blend-mode: screen;">
+    </div>
+
+    <!-- Scroll Progress Indicator -->
+    <div id="scroll-progress" class="fixed top-0 left-0 h-[2px] bg-emerald-500 z-[1000] w-0 transition-all duration-75">
+    </div>
+
+    <nav
+        class="fixed top-0 inset-x-0 z-50 flex items-center justify-center px-3 sm:px-8 md:px-12 lg:px-24 py-3 sm:py-4 bg-gradient-to-b from-black/95 via-black/85 to-transparent backdrop-blur-md pointer-events-auto opacity-0 translate-y-[-20px] animate-[fadeInUp_1s_ease-out_1s_forwards]">
+        <div
+            class="flex flex-wrap justify-center gap-1.5 sm:gap-4 font-inter text-[10px] sm:text-xs tracking-widest uppercase">
+            <a href="#home"
+                class="nav-link px-3 py-1.5 sm:px-5 sm:py-2.5 rounded border border-transparent text-gray-400 hover:text-emerald-400 hover:border-emerald-500/50 hover:bg-emerald-500/10 transition-all">Home</a>
+            <a href="#summary"
+                class="nav-link px-3 py-1.5 sm:px-5 sm:py-2.5 rounded border border-transparent text-gray-400 hover:text-emerald-400 hover:border-emerald-500/50 hover:bg-emerald-500/10 transition-all">Summary</a>
+            <a href="#experience"
+                class="nav-link px-3 py-1.5 sm:px-5 sm:py-2.5 rounded border border-transparent text-gray-400 hover:text-emerald-400 hover:border-emerald-500/50 hover:bg-emerald-500/10 transition-all">Experience</a>
+            <a href="#projects"
+                class="nav-link px-3 py-1.5 sm:px-5 sm:py-2.5 rounded border border-transparent text-gray-400 hover:text-emerald-400 hover:border-emerald-500/50 hover:bg-emerald-500/10 transition-all">Projects</a>
+            <a href="#contact"
+                class="nav-link px-3 py-1.5 sm:px-5 sm:py-2.5 rounded border border-transparent text-gray-400 hover:text-emerald-400 hover:border-emerald-500/50 hover:bg-emerald-500/10 transition-all">Contact</a>
+        </div>
+    </nav>
+
+    <header id="home" class="relative min-h-screen w-full flex items-center overflow-hidden bg-black">
+
+        <!-- Ambient Floating Particles Canvas -->
+        <canvas id="particles" class="absolute inset-0 z-0 pointer-events-none opacity-40"></canvas>
+
+        <div
+            class="relative z-10 w-full min-h-screen flex flex-col lg:flex-row-reverse items-center justify-center lg:justify-between px-6 sm:px-10 md:px-16 lg:px-24 xl:px-32 py-24 lg:py-0">
+
+            <!-- Right Side: Integrated Image (Background Overlaid on Mobile, Side-by-Side on Desktop) -->
+            <div
+                class="absolute lg:relative inset-0 lg:inset-auto w-full lg:w-1/2 h-full lg:h-screen flex items-center justify-center lg:justify-end opacity-35 sm:opacity-45 lg:opacity-60 pointer-events-none lg:pointer-events-auto z-0 lg:z-10 group animate-[fadeInRight_1.2s_ease-out_0.2s_forwards]">
+                <!-- Outer Gradient Vignette for perfect blending -->
+                <div
+                    class="absolute inset-0 z-20 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_25%,black_85%)]">
+                </div>
+                <!-- The Portrait -->
+                <img src="1000241820.jpg_202607242024.jpeg" alt="Cyber Classical Portrait"
+                    class="w-full h-full object-cover lg:object-contain object-center lg:object-right blend-lighten relative z-10 scale-[1.05] lg:scale-[1.1] transform-gpu origin-center lg:origin-right brightness-75 lg:brightness-100 opacity-70 lg:group-hover:opacity-100 transition-all duration-700">
+            </div>
+
+            <!-- Left Side: Typography & Content (Overlaid above dulled image on Mobile) -->
+            <div
+                class="w-full lg:w-1/2 flex flex-col justify-center items-start lg:pr-16 relative z-30 pt-12 lg:pt-0 pb-12 lg:pb-0">
+                <p
+                    class="font-inter text-emerald-400 text-xs sm:text-sm tracking-[0.3em] uppercase mb-4 sm:mb-6 opacity-0 translate-y-4 animate-[fadeInUp_1s_ease-out_0.4s_forwards]">
+                    Portfolio &middot; System Online
+                </p>
+                <h1
+                    class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-cinzel text-white leading-[1.1] mb-6 opacity-0 translate-y-4 animate-[fadeInUp_1s_ease-out_0.6s_forwards]">
+                    ALI<br>ZAFAR.
+                </h1>
+                <p
+                    class="text-lg sm:text-xl md:text-2xl font-inter text-gray-300 lg:text-gray-400 max-w-xl font-light leading-relaxed mb-8 sm:mb-10 opacity-0 translate-y-4 animate-[fadeInUp_1s_ease-out_0.8s_forwards]">
+                    AI Engineer building <span class="text-white">Intelligent Systems</span> & <span
+                        class="text-white">Scalable AI Solutions</span>.
+                </p>
+
+                <div
+                    class="flex flex-col sm:flex-row w-full sm:w-auto gap-4 sm:gap-6 opacity-0 translate-y-4 animate-[fadeInUp_1s_ease-out_1s_forwards]">
+                    <!-- Primary Button -->
+                    <a href="#projects"
+                        class="w-full sm:w-auto text-center px-8 py-3.5 bg-emerald-500/10 border border-emerald-500/50 text-emerald-400 font-inter uppercase tracking-widest text-sm hover:bg-emerald-500 hover:text-white hover:border-emerald-400 transition-all duration-500 relative overflow-hidden group inline-block cursor-pointer">
+                        <span class="relative z-10 transition-colors duration-300">View Projects</span>
+                        <div
+                            class="absolute inset-0 bg-emerald-500 scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out z-0">
+                        </div>
+                    </a>
+
+                    <!-- Secondary Button -->
+                    <a href="#contact"
+                        class="w-full sm:w-auto text-center px-8 py-3.5 bg-transparent border border-emerald-500/50 text-emerald-400 font-inter uppercase tracking-widest text-sm hover:bg-emerald-500/20 transition-all duration-500 inline-block cursor-pointer">
+                        Contact Me
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-20 w-full bg-black pb-32">
+        <div class="w-full px-5 sm:px-8 md:px-12 lg:px-24 xl:px-32 flex flex-col gap-20 md:gap-32 pt-16 md:pt-20">
+
+            <!-- SUMMARY & SKILLS SECTION -->
+            <section id="summary" class="scroll-mt-32 scroll-reveal">
+                <div class="flex items-center gap-4 mb-12">
+                    <h3 class="text-4xl font-cinzel text-white">Summary <span class="text-emerald-500">&</span> Skills
+                    </h3>
+                    <div class="flex-1 h-[1px] bg-white/10 ml-4"></div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                    <div>
+                        <p class="text-gray-300 font-inter text-lg leading-relaxed mb-6">
+                            AI Engineer with extensive experience across <span
+                                class="text-emerald-400 font-semibold">Machine Learning (ML)</span> and <span
+                                class="text-emerald-400 font-semibold">Deep Learning (DL)</span>, specializing in
+                            intelligent automation and next-gen AI architectures.
+                        </p>
+                        <p class="text-gray-400 font-inter text-lg leading-relaxed">
+                            I possess a strong technical grip on building production-grade <span class="text-white">RAG
+                                (Retrieval-Augmented Generation) systems</span>, autonomous <span class="text-white">AI
+                                Agents</span>, and complex <span class="text-white">Multi-Agent Systems</span>
+                            (LangGraph, LangChain). I combine deep neural network capabilities with event-driven
+                            automation (n8n, REST APIs) to transform complex workflows into reliable, zero-touch
+                            intelligent systems.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="text-white font-cinzel text-lg mb-2">Machine & Deep Learning</h4>
+                            <p class="text-emerald-400 font-inter text-xs leading-relaxed uppercase tracking-wider">
+                                PyTorch, TensorFlow, Scikit-Learn, XGBoost, Neural Networks, BERT, Hugging Face</p>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-cinzel text-lg mb-2">Agentic AI & RAG</h4>
+                            <p class="text-emerald-400 font-inter text-xs leading-relaxed uppercase tracking-wider">
+                                LangChain, LangGraph, Multi-Agent Systems, RAG, OpenAI, Gemini, Claude API</p>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-cinzel text-lg mb-2">Languages & Runtimes</h4>
+                            <p class="text-emerald-400 font-inter text-xs leading-relaxed uppercase tracking-wider">
+                                Python, JavaScript, Node.js, Rust, Go, Julia, R</p>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-cinzel text-lg mb-2">Data & Databases</h4>
+                            <p class="text-emerald-400 font-inter text-xs leading-relaxed uppercase tracking-wider">
+                                Qdrant, ChromaDB, Neo4j, PostgreSQL, SQL, Supabase, Firebase, Redis</p>
+                        </div>
+                        <div class="sm:col-span-2">
+                            <h4 class="text-white font-cinzel text-lg mb-2">Automation & Orchestration</h4>
+                            <p class="text-emerald-400 font-inter text-xs leading-relaxed uppercase tracking-wider">
+                                n8n (primary), Webhook Design, REST API Integration, Cron Scheduling, Event-Driven
+                                Pipelines</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- EXPERIENCE SECTION -->
+            <section id="experience" class="scroll-mt-32 scroll-reveal">
+                <div class="flex items-center gap-4 mb-12">
+                    <h3 class="text-4xl font-cinzel text-white">Experience</h3>
+                    <div class="flex-1 h-[1px] bg-white/10 ml-4"></div>
+                </div>
+
+                <div class="flex flex-col gap-10 border-l border-white/10 pl-5 sm:pl-8 ml-2 sm:ml-4">
+                    <!-- Job 1: European Union Center of Excellence -->
+                    <div class="relative scroll-reveal">
+                        <div
+                            class="absolute w-3 h-3 bg-emerald-500 rounded-full -left-[26px] sm:-left-[38px] top-2 shadow-[0_0_10px_rgba(16,185,129,0.8)]">
+                        </div>
+                        <h4 class="text-xl sm:text-2xl font-cinzel text-white mb-1">AI/ML Engineer Intern</h4>
+                        <div class="flex flex-wrap gap-2 sm:gap-4 items-center mb-3 text-xs sm:text-sm">
+                            <span class="text-emerald-400 font-inter font-medium uppercase tracking-widest">European
+                                Union
+                                Center of Excellence</span>
+                            <span class="text-gray-500 hidden sm:inline">|</span>
+                            <span class="text-gray-400 font-inter">July 6, 2026 – Present (6 Weeks)</span>
+                            <span class="text-gray-500 hidden sm:inline">|</span>
+                            <span class="text-gray-400 font-inter">Onsite</span>
+                        </div>
+                        <ul
+                            class="list-disc list-inside text-gray-400 font-inter leading-relaxed space-y-1 text-sm sm:text-base">
+                            <li>Developing predictive climate data models and full-stack application interfaces for
+                                environmental analytics.</li>
+                            <li>Engineered climate data pipelines and software deployment tools tailored for research
+                                data visualization.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Job 2: Prompt to Flow -->
+                    <div class="relative scroll-reveal">
+                        <div class="absolute w-3 h-3 bg-emerald-500/60 rounded-full -left-[26px] sm:-left-[38px] top-2">
+                        </div>
+                        <h4 class="text-xl sm:text-2xl font-cinzel text-white mb-1">AI Research & Product Strategy
+                            Intern</h4>
+                        <div class="flex flex-wrap gap-2 sm:gap-4 items-center mb-3 text-xs sm:text-sm">
+                            <span class="text-emerald-400 font-inter font-medium uppercase tracking-widest">Prompt to
+                                Flow</span>
+                            <span class="text-gray-500 hidden sm:inline">|</span>
+                            <span class="text-gray-400 font-inter">Feb 2026 – Mar 2026</span>
+                            <span class="text-gray-500 hidden sm:inline">|</span>
+                            <span class="text-gray-400 font-inter">Islamabad, Pakistan (Hybrid)</span>
+                        </div>
+                        <ul
+                            class="list-disc list-inside text-gray-400 font-inter leading-relaxed space-y-1 text-sm sm:text-base">
+                            <li>Conducted AI market research and competitor analysis to identify automation gaps and
+                                prioritize new features.</li>
+                            <li>Recommended optimal AI/ML model stacks and authored data-driven strategy reports to
+                                guide product roadmaps.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Job 3: Elevvo Pathway -->
+                    <div class="relative scroll-reveal">
+                        <div class="absolute w-3 h-3 bg-white/20 rounded-full -left-[26px] sm:-left-[38px] top-2"></div>
+                        <h4 class="text-xl sm:text-2xl font-cinzel text-white mb-1">AI/ML Engineer Intern</h4>
+                        <div class="flex flex-wrap gap-2 sm:gap-4 items-center mb-3 text-xs sm:text-sm">
+                            <span class="text-emerald-400 font-inter font-medium uppercase tracking-widest">Elevvo
+                                Pathway</span>
+                            <span class="text-gray-500 hidden sm:inline">|</span>
+                            <span class="text-gray-400 font-inter">July 2024 – Present</span>
+                            <span class="text-gray-500 hidden sm:inline">|</span>
+                            <span class="text-gray-400 font-inter">Remote</span>
+                        </div>
+                        <ul
+                            class="list-disc list-inside text-gray-400 font-inter leading-relaxed space-y-1 text-sm sm:text-base">
+                            <li>Built n8n automation pipelines pulling live news sentiment to feed XGBoost forecasting
+                                models via Flask REST API.</li>
+                            <li>Fine-tuned BERT transformers (~94% accuracy) and designed reusable NLP workflow
+                                templates.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Job 4: Developers Hub -->
+                    <div class="relative scroll-reveal">
+                        <div class="absolute w-3 h-3 bg-white/20 rounded-full -left-[26px] sm:-left-[38px] top-2"></div>
+                        <h4 class="text-xl sm:text-2xl font-cinzel text-white mb-1">AI/ML Engineer Intern</h4>
+                        <div class="flex flex-wrap gap-2 sm:gap-4 items-center mb-3 text-xs sm:text-sm">
+                            <span class="text-emerald-400 font-inter font-medium uppercase tracking-widest">Developers
+                                Hub</span>
+                            <span class="text-gray-500 hidden sm:inline">|</span>
+                            <span class="text-gray-400 font-inter">June 2024 – July 2024</span>
+                            <span class="text-gray-500 hidden sm:inline">|</span>
+                            <span class="text-gray-400 font-inter">Rawalpindi, Pakistan</span>
+                        </div>
+                        <ul
+                            class="list-disc list-inside text-gray-400 font-inter leading-relaxed space-y-1 text-sm sm:text-base">
+                            <li>Architected real-time stock sentiment indicators (Twitter → Gemini LLM) and churn
+                                prediction pipelines (~80% accuracy).</li>
+                            <li>Built automated WhatsApp customer notification workflows routing alerts via the Meta
+                                Business API.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PROJECTS SECTION -->
+            <section id="projects" class="scroll-mt-32">
+                <div class="flex items-center gap-4 mb-12 scroll-reveal">
+                    <h3 class="text-4xl font-cinzel text-white">Featured Projects</h3>
+                    <div class="flex-1 h-[1px] bg-white/10 ml-4"></div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+
+                    <!-- Project: SehatHub -->
+                    <div class="project-card scroll-reveal group [perspective:1000px] h-[360px] sm:h-[340px]">
+                        <div
+                            class="relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+
+                            <!-- FRONT OF CARD -->
+                            <div
+                                class="absolute inset-0 [backface-visibility:hidden] bg-white/5 border border-white/10 group-hover:border-emerald-500/50 p-7 flex flex-col justify-between overflow-hidden shadow-lg transition-all duration-300">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between mb-2 relative z-10 flex-wrap gap-2">
+                                        <h4 class="text-xl font-cinzel text-white">SehatHub</h4>
+                                        <span
+                                            class="px-2.5 py-1 rounded bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[10px] font-inter uppercase tracking-wider font-semibold flex items-center gap-1">
+                                            🏆 1st Place &middot; Google Build with Gemma
+                                        </span>
+                                    </div>
+                                    <p
+                                        class="text-[10px] sm:text-xs font-inter text-emerald-400 mb-4 tracking-widest uppercase relative z-10 leading-relaxed">
+                                        FastAPI, React/Vite, Gemma 4</p>
+                                    <p class="text-gray-400 text-sm font-inter leading-relaxed relative z-10">
+                                        Healthcare-accessibility platform for Pakistan integrating MediScan PK,
+                                        SehatVoice, LabSense AI, and NutriScan. Built collaboratively under hackathon
+                                        time constraints with an agentic coding workflow.
+                                    </p>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between relative z-10 pt-2 border-t border-white/5">
+                                    <span
+                                        class="text-[11px] font-inter text-emerald-500/80 uppercase tracking-wider flex items-center gap-1">
+                                        Hover to flip ⤾
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- BACK OF CARD (EXTENDED DETAILS) -->
+                            <div
+                                class="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] bg-black/95 border border-emerald-500/60 p-7 flex flex-col justify-between overflow-hidden shadow-[0_0_30px_rgba(16,185,129,0.2)]">
+                                <div
+                                    class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(16,185,129,0.1),transparent_70%)] pointer-events-none">
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between mb-2 relative z-10">
+                                        <h4 class="text-lg font-cinzel text-emerald-400">SehatHub &middot; Key Details
+                                        </h4>
+                                    </div>
+                                    <p class="text-xs font-inter text-gray-300 leading-relaxed relative z-10 mb-4">
+                                        1st Place Winner in Google's Build with Gemma Hackathon. Integrated multi-modal
+                                        AI models for medical diagnostic analysis and real-time Urdu voice translation
+                                        for accessible regional healthcare.
+                                    </p>
+                                    <div
+                                        class="p-3 bg-white/5 border border-white/10 rounded text-[11px] font-inter text-gray-400 space-y-1">
+                                        <div
+                                            class="text-emerald-400 font-semibold uppercase tracking-wider text-[10px]">
+                                            Technical Highlights</div>
+                                        <div>&bull; Built with production-ready architecture</div>
+                                        <div>&bull; Fully automated & scalable workflow</div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between relative z-10 pt-2 border-t border-white/10">
+
+                                    <a href="https://github.com/mazaricodes/SehatHub" target="_blank"
+                                        class="text-emerald-400 text-xs font-inter uppercase tracking-widest hover:text-emerald-300 relative z-10 flex items-center gap-2 w-fit">
+                                        <span>View Source</span>
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                        </svg>
+                                    </a>
+                                    <span class="text-[10px] font-inter text-gray-500 uppercase tracking-wider">
+                                        Flip back ⤿
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Project: Advocate AI -->
+                    <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
+                        <div
+                            class="relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+
+                            <!-- FRONT OF CARD -->
+                            <div
+                                class="absolute inset-0 [backface-visibility:hidden] bg-white/5 border border-white/10 group-hover:border-emerald-500/50 p-7 flex flex-col justify-between overflow-hidden shadow-lg transition-all duration-300">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between mb-2 relative z-10">
+                                        <h4 class="text-xl font-cinzel text-white">Advocate AI</h4>
+
+                                    </div>
+                                    <p
+                                        class="text-[10px] sm:text-xs font-inter text-emerald-400 mb-4 tracking-widest uppercase relative z-10 leading-relaxed">
+                                        LangGraph, Qdrant, Neo4j, FastAPI, Groq</p>
+                                    <p class="text-gray-400 text-sm font-inter leading-relaxed relative z-10">
+                                        Four-agent LangGraph pipeline (retrieval, reasoning, drafting, review) with
+                                        conditional routing and shared state for Pakistani legal research. Combines
+                                        Qdrant vector search with Neo4j graph traversal for hybrid semantic + relational
+                                        retrieval.
+                                    </p>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between relative z-10 pt-2 border-t border-white/5">
+                                    <span
+                                        class="text-[11px] font-inter text-emerald-500/80 uppercase tracking-wider flex items-center gap-1">
+                                        Hover to flip ⤾
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- BACK OF CARD (EXTENDED DETAILS) -->
+                            <div
+                                class="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] bg-black/95 border border-emerald-500/60 p-7 flex flex-col justify-between overflow-hidden shadow-[0_0_30px_rgba(16,185,129,0.2)]">
+                                <div
+                                    class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(16,185,129,0.1),transparent_70%)] pointer-events-none">
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between mb-2 relative z-10">
+                                        <h4 class="text-lg font-cinzel text-emerald-400">Advocate AI &middot; Key
+                                            Details</h4>
+                                    </div>
+                                    <p class="text-xs font-inter text-gray-300 leading-relaxed relative z-10 mb-4">
+                                        Engineered hybrid GraphRAG logic combining vector embeddings with knowledge
+                                        graph nodes. Achieved sub-second query response times using Groq LLaMA-3
+                                        inference.
+                                    </p>
+                                    <div
+                                        class="p-3 bg-white/5 border border-white/10 rounded text-[11px] font-inter text-gray-400 space-y-1">
+                                        <div
+                                            class="text-emerald-400 font-semibold uppercase tracking-wider text-[10px]">
+                                            Technical Highlights</div>
+                                        <div>&bull; Built with production-ready architecture</div>
+                                        <div>&bull; Fully automated & scalable workflow</div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between relative z-10 pt-2 border-t border-white/10">
+
+                                    <a href="https://github.com/ITXAli/Advocate-AI" target="_blank"
+                                        class="text-emerald-400 text-xs font-inter uppercase tracking-widest hover:text-emerald-300 relative z-10 flex items-center gap-2 w-fit">
+                                        <span>View Source</span>
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                        </svg>
+                                    </a>
+                                    <span class="text-[10px] font-inter text-gray-500 uppercase tracking-wider">
+                                        Flip back ⤿
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Project: Audio Denoiser -->
+                    <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
+                        <div
+                            class="relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+
+                            <!-- FRONT OF CARD -->
+                            <div
+                                class="absolute inset-0 [backface-visibility:hidden] bg-white/5 border border-white/10 group-hover:border-emerald-500/50 p-7 flex flex-col justify-between overflow-hidden shadow-lg transition-all duration-300">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between mb-2 relative z-10">
+                                        <h4 class="text-xl font-cinzel text-white">Audio Denoiser</h4>
+                                    </div>
+                                    <p
+                                        class="text-[10px] sm:text-xs font-inter text-emerald-400 mb-4 tracking-widest uppercase relative z-10 leading-relaxed">
+                                        PyTorch, U-Net Architecture, Audio DSP</p>
+                                    <p class="text-gray-400 text-sm font-inter leading-relaxed relative z-10">
+                                        Speech enhancement and deep learning noise suppression system built on a U-Net
+                                        architecture. Removes ambient background noise, room reverberation, and static
+                                        hums from audio streams.
+                                    </p>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between relative z-10 pt-2 border-t border-white/5">
+                                    <span
+                                        class="text-[11px] font-inter text-emerald-500/80 uppercase tracking-wider flex items-center gap-1">
+                                        Hover to flip ⤾
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- BACK OF CARD (EXTENDED DETAILS) -->
+                            <div
+                                class="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] bg-black/95 border border-emerald-500/60 p-7 flex flex-col justify-between overflow-hidden shadow-[0_0_30px_rgba(16,185,129,0.2)]">
+                                <div
+                                    class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(16,185,129,0.1),transparent_70%)] pointer-events-none">
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between mb-2 relative z-10">
+                                        <h4 class="text-lg font-cinzel text-emerald-400">Audio Denoiser &middot; Key
+                                            Details
+                                        </h4>
+                                    </div>
+                                    <p class="text-xs font-inter text-gray-300 leading-relaxed relative z-10 mb-4">
+                                        Utilizes a deep convolutional U-Net neural network with STFT spectrogram feature
+                                        extraction for real-time speech enhancement, noise filtering, and high-fidelity
+                                        audio reconstruction.
+                                    </p>
+                                    <div
+                                        class="p-3 bg-white/5 border border-white/10 rounded text-[11px] font-inter text-gray-400 space-y-1">
+                                        <div
+                                            class="text-emerald-400 font-semibold uppercase tracking-wider text-[10px]">
+                                            Technical Highlights</div>
+                                        <div>&bull; Deep U-Net convolutional noise suppression</div>
+                                        <div>&bull; High SNR improvement for speech inputs</div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between relative z-10 pt-2 border-t border-white/10">
+
+                                    <a href="https://github.com/ITXAli" target="_blank"
+                                        class="text-emerald-400 text-xs font-inter uppercase tracking-widest hover:text-emerald-300 relative z-10 flex items-center gap-2 w-fit">
+                                        <span>View Source</span>
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                        </svg>
+                                    </a>
+                                    <span class="text-[10px] font-inter text-gray-500 uppercase tracking-wider">
+                                        Flip back ⤿
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- Project: AI WhatsApp Bot -->
+                    <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
+                        <div
+                            class="relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+
+                            <!-- FRONT OF CARD -->
+                            <div
+                                class="absolute inset-0 [backface-visibility:hidden] bg-white/5 border border-white/10 group-hover:border-emerald-500/50 p-7 flex flex-col justify-between overflow-hidden shadow-lg transition-all duration-300">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between mb-2 relative z-10">
+                                        <h4 class="text-xl font-cinzel text-white">AI WhatsApp Bot</h4>
+
+                                    </div>
+                                    <p
+                                        class="text-[10px] sm:text-xs font-inter text-emerald-400 mb-4 tracking-widest uppercase relative z-10 leading-relaxed">
+                                        n8n, Twilio, OpenAI, Airtable</p>
+                                    <p class="text-gray-400 text-sm font-inter leading-relaxed relative z-10">
+                                        Multilingual 24/7 support agent: inbound WhatsApp triggers n8n → OpenAI
+                                        classifies intent and drafts a reply → ticket logged in Airtable → response sent
+                                        via Twilio. Includes a sentiment-detection layer for auto-escalating negative
+                                        messages.
+                                    </p>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between relative z-10 pt-2 border-t border-white/5">
+                                    <span
+                                        class="text-[11px] font-inter text-emerald-500/80 uppercase tracking-wider flex items-center gap-1">
+                                        Hover to flip ⤾
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- BACK OF CARD (EXTENDED DETAILS) -->
+                            <div
+                                class="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] bg-black/95 border border-emerald-500/60 p-7 flex flex-col justify-between overflow-hidden shadow-[0_0_30px_rgba(16,185,129,0.2)]">
+                                <div
+                                    class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(16,185,129,0.1),transparent_70%)] pointer-events-none">
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between mb-2 relative z-10">
+                                        <h4 class="text-lg font-cinzel text-emerald-400">AI WhatsApp Bot &middot; Key
+                                            Details</h4>
+                                    </div>
+                                    <p class="text-xs font-inter text-gray-300 leading-relaxed relative z-10 mb-4">
+                                        Processes hundreds of daily inbound messages automatically. Built custom
+                                        sentiment analysis routing to handle priority customer escalations instantly.
+                                    </p>
+                                    <div
+                                        class="p-3 bg-white/5 border border-white/10 rounded text-[11px] font-inter text-gray-400 space-y-1">
+                                        <div
+                                            class="text-emerald-400 font-semibold uppercase tracking-wider text-[10px]">
+                                            Technical Highlights</div>
+                                        <div>&bull; Built with production-ready architecture</div>
+                                        <div>&bull; Fully automated & scalable workflow</div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between relative z-10 pt-2 border-t border-white/10">
+                                    <span class="text-xs text-gray-500 italic">Internal Client Solution</span>
+                                    <span class="text-[10px] font-inter text-gray-500 uppercase tracking-wider">
+                                        Flip back ⤿
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Project: CV Shortlister -->
+                    <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
+                        <div
+                            class="relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+
+                            <!-- FRONT OF CARD -->
+                            <div
+                                class="absolute inset-0 [backface-visibility:hidden] bg-white/5 border border-white/10 group-hover:border-emerald-500/50 p-7 flex flex-col justify-between overflow-hidden shadow-lg transition-all duration-300">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between mb-2 relative z-10">
+                                        <h4 class="text-xl font-cinzel text-white">CV Shortlister</h4>
+
+                                    </div>
+                                    <p
+                                        class="text-[10px] sm:text-xs font-inter text-emerald-400 mb-4 tracking-widest uppercase relative z-10 leading-relaxed">
+                                        n8n, OpenAI, Google Sheets, Gmail</p>
+                                    <p class="text-gray-400 text-sm font-inter leading-relaxed relative z-10">
+                                        End-to-end recruitment pipeline: n8n watches a Gmail inbox, extracts CV text,
+                                        and uses OpenAI to score candidates against job criteria — cutting manual
+                                        screening time by ~80% across 50+ applications per batch.
+                                    </p>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between relative z-10 pt-2 border-t border-white/5">
+                                    <span
+                                        class="text-[11px] font-inter text-emerald-500/80 uppercase tracking-wider flex items-center gap-1">
+                                        Hover to flip ⤾
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- BACK OF CARD (EXTENDED DETAILS) -->
+                            <div
+                                class="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] bg-black/95 border border-emerald-500/60 p-7 flex flex-col justify-between overflow-hidden shadow-[0_0_30px_rgba(16,185,129,0.2)]">
+                                <div
+                                    class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(16,185,129,0.1),transparent_70%)] pointer-events-none">
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between mb-2 relative z-10">
+                                        <h4 class="text-lg font-cinzel text-emerald-400">CV Shortlister &middot; Key
+                                            Details</h4>
+                                    </div>
+                                    <p class="text-xs font-inter text-gray-300 leading-relaxed relative z-10 mb-4">
+                                        Automates resume parsing, skill matrix matching, and candidate ranking directly
+                                        within Google Sheets with instant email confirmation triggers.
+                                    </p>
+                                    <div
+                                        class="p-3 bg-white/5 border border-white/10 rounded text-[11px] font-inter text-gray-400 space-y-1">
+                                        <div
+                                            class="text-emerald-400 font-semibold uppercase tracking-wider text-[10px]">
+                                            Technical Highlights</div>
+                                        <div>&bull; Built with production-ready architecture</div>
+                                        <div>&bull; Fully automated & scalable workflow</div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between relative z-10 pt-2 border-t border-white/10">
+                                    <span class="text-xs text-gray-500 italic">Internal Client Solution</span>
+                                    <span class="text-[10px] font-inter text-gray-500 uppercase tracking-wider">
+                                        Flip back ⤿
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Project: Market Signal Pipeline -->
+                    <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
+                        <div
+                            class="relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+
+                            <!-- FRONT OF CARD -->
+                            <div
+                                class="absolute inset-0 [backface-visibility:hidden] bg-white/5 border border-white/10 group-hover:border-emerald-500/50 p-7 flex flex-col justify-between overflow-hidden shadow-lg transition-all duration-300">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between mb-2 relative z-10">
+                                        <h4 class="text-xl font-cinzel text-white">Market Signal Pipeline</h4>
+
+                                    </div>
+                                    <p
+                                        class="text-[10px] sm:text-xs font-inter text-emerald-400 mb-4 tracking-widest uppercase relative z-10 leading-relaxed">
+                                        n8n, Gemini API, VADER, XGBoost</p>
+                                    <p class="text-gray-400 text-sm font-inter leading-relaxed relative z-10">
+                                        Continuous pipeline: Twitter stream → VADER sentiment scoring → S&P 500
+                                        enrichment → XGBoost inference → Flask API signal delivery, with zero manual
+                                        intervention.
+                                    </p>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between relative z-10 pt-2 border-t border-white/5">
+                                    <span
+                                        class="text-[11px] font-inter text-emerald-500/80 uppercase tracking-wider flex items-center gap-1">
+                                        Hover to flip ⤾
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- BACK OF CARD (EXTENDED DETAILS) -->
+                            <div
+                                class="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] bg-black/95 border border-emerald-500/60 p-7 flex flex-col justify-between overflow-hidden shadow-[0_0_30px_rgba(16,185,129,0.2)]">
+                                <div
+                                    class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(16,185,129,0.1),transparent_70%)] pointer-events-none">
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between mb-2 relative z-10">
+                                        <h4 class="text-lg font-cinzel text-emerald-400">Market Signal Pipeline &middot;
+                                            Key Details</h4>
+                                    </div>
+                                    <p class="text-xs font-inter text-gray-300 leading-relaxed relative z-10 mb-4">
+                                        Processes continuous live sentiment feeds, combining social metrics with
+                                        financial indicators for real-time market movement predictions.
+                                    </p>
+                                    <div
+                                        class="p-3 bg-white/5 border border-white/10 rounded text-[11px] font-inter text-gray-400 space-y-1">
+                                        <div
+                                            class="text-emerald-400 font-semibold uppercase tracking-wider text-[10px]">
+                                            Technical Highlights</div>
+                                        <div>&bull; Built with production-ready architecture</div>
+                                        <div>&bull; Fully automated & scalable workflow</div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between relative z-10 pt-2 border-t border-white/10">
+                                    <span class="text-xs text-gray-500 italic">Internal Client Solution</span>
+                                    <span class="text-[10px] font-inter text-gray-500 uppercase tracking-wider">
+                                        Flip back ⤿
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Project: Stock Trend Forecaster -->
+                    <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
+                        <div
+                            class="relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+
+                            <!-- FRONT OF CARD -->
+                            <div
+                                class="absolute inset-0 [backface-visibility:hidden] bg-white/5 border border-white/10 group-hover:border-emerald-500/50 p-7 flex flex-col justify-between overflow-hidden shadow-lg transition-all duration-300">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between mb-2 relative z-10">
+                                        <h4 class="text-xl font-cinzel text-white">Stock Trend Forecaster</h4>
+
+                                    </div>
+                                    <p
+                                        class="text-[10px] sm:text-xs font-inter text-emerald-400 mb-4 tracking-widest uppercase relative z-10 leading-relaxed">
+                                        TensorFlow, XGBoost, VADER, Flask</p>
+                                    <p class="text-gray-400 text-sm font-inter leading-relaxed relative z-10">
+                                        Combines VADER sentiment analysis on financial headlines with S&P 500 historical
+                                        data to train an XGBoost predictor, deployed as a Flask REST API with a
+                                        live-inference front end.
+                                    </p>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between relative z-10 pt-2 border-t border-white/5">
+                                    <span
+                                        class="text-[11px] font-inter text-emerald-500/80 uppercase tracking-wider flex items-center gap-1">
+                                        Hover to flip ⤾
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- BACK OF CARD (EXTENDED DETAILS) -->
+                            <div
+                                class="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] bg-black/95 border border-emerald-500/60 p-7 flex flex-col justify-between overflow-hidden shadow-[0_0_30px_rgba(16,185,129,0.2)]">
+                                <div
+                                    class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(16,185,129,0.1),transparent_70%)] pointer-events-none">
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between mb-2 relative z-10">
+                                        <h4 class="text-lg font-cinzel text-emerald-400">Stock Trend Forecaster &middot;
+                                            Key Details</h4>
+                                    </div>
+                                    <p class="text-xs font-inter text-gray-300 leading-relaxed relative z-10 mb-4">
+                                        Trained on over 50,000 financial headlines. Features a custom Flask REST
+                                        dashboard displaying interactive confidence bands and trading signals.
+                                    </p>
+                                    <div
+                                        class="p-3 bg-white/5 border border-white/10 rounded text-[11px] font-inter text-gray-400 space-y-1">
+                                        <div
+                                            class="text-emerald-400 font-semibold uppercase tracking-wider text-[10px]">
+                                            Technical Highlights</div>
+                                        <div>&bull; Built with production-ready architecture</div>
+                                        <div>&bull; Fully automated & scalable workflow</div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between relative z-10 pt-2 border-t border-white/10">
+
+                                    <a href="https://github.com/ITXAli/Stock-Trend-Forecasting-with-News-Sentiment-and-S-P-500-Data"
+                                        target="_blank"
+                                        class="text-emerald-400 text-xs font-inter uppercase tracking-widest hover:text-emerald-300 relative z-10 flex items-center gap-2 w-fit">
+                                        <span>View Source</span>
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                        </svg>
+                                    </a>
+                                    <span class="text-[10px] font-inter text-gray-500 uppercase tracking-wider">
+                                        Flip back ⤿
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Project: BERT News Classifier -->
+                    <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
+                        <div
+                            class="relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+
+                            <!-- FRONT OF CARD -->
+                            <div
+                                class="absolute inset-0 [backface-visibility:hidden] bg-white/5 border border-white/10 group-hover:border-emerald-500/50 p-7 flex flex-col justify-between overflow-hidden shadow-lg transition-all duration-300">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between mb-2 relative z-10">
+                                        <h4 class="text-xl font-cinzel text-white">BERT News Classifier</h4>
+
+                                    </div>
+                                    <p
+                                        class="text-[10px] sm:text-xs font-inter text-emerald-400 mb-4 tracking-widest uppercase relative z-10 leading-relaxed">
+                                        PyTorch, Hugging Face</p>
+                                    <p class="text-gray-400 text-sm font-inter leading-relaxed relative z-10">
+                                        Fine-tuned bert-base-uncased on the AG News benchmark for 4-class text
+                                        classification (~94% accuracy), applying tokenization, attention masking, and
+                                        hyperparameter tuning best practices.
+                                    </p>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between relative z-10 pt-2 border-t border-white/5">
+                                    <span
+                                        class="text-[11px] font-inter text-emerald-500/80 uppercase tracking-wider flex items-center gap-1">
+                                        Hover to flip ⤾
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- BACK OF CARD (EXTENDED DETAILS) -->
+                            <div
+                                class="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] bg-black/95 border border-emerald-500/60 p-7 flex flex-col justify-between overflow-hidden shadow-[0_0_30px_rgba(16,185,129,0.2)]">
+                                <div
+                                    class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(16,185,129,0.1),transparent_70%)] pointer-events-none">
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between mb-2 relative z-10">
+                                        <h4 class="text-lg font-cinzel text-emerald-400">BERT News Classifier &middot;
+                                            Key Details</h4>
+                                    </div>
+                                    <p class="text-xs font-inter text-gray-300 leading-relaxed relative z-10 mb-4">
+                                        Achieved 94.2% test accuracy on AG News dataset. Utilized AdamW optimizer,
+                                        linear learning rate warmups, and mixed-precision FP16 training.
+                                    </p>
+                                    <div
+                                        class="p-3 bg-white/5 border border-white/10 rounded text-[11px] font-inter text-gray-400 space-y-1">
+                                        <div
+                                            class="text-emerald-400 font-semibold uppercase tracking-wider text-[10px]">
+                                            Technical Highlights</div>
+                                        <div>&bull; Built with production-ready architecture</div>
+                                        <div>&bull; Fully automated & scalable workflow</div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between relative z-10 pt-2 border-t border-white/10">
+
+                                    <a href="https://github.com/ITXAli/Bert-News-Classifier" target="_blank"
+                                        class="text-emerald-400 text-xs font-inter uppercase tracking-widest hover:text-emerald-300 relative z-10 flex items-center gap-2 w-fit">
+                                        <span>View Source</span>
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                        </svg>
+                                    </a>
+                                    <span class="text-[10px] font-inter text-gray-500 uppercase tracking-wider">
+                                        Flip back ⤿
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Project: Churn Prediction Pipeline -->
+                    <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
+                        <div
+                            class="relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+
+                            <!-- FRONT OF CARD -->
+                            <div
+                                class="absolute inset-0 [backface-visibility:hidden] bg-white/5 border border-white/10 group-hover:border-emerald-500/50 p-7 flex flex-col justify-between overflow-hidden shadow-lg transition-all duration-300">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between mb-2 relative z-10">
+                                        <h4 class="text-xl font-cinzel text-white">Churn Prediction Pipeline</h4>
+
+                                    </div>
+                                    <p
+                                        class="text-[10px] sm:text-xs font-inter text-emerald-400 mb-4 tracking-widest uppercase relative z-10 leading-relaxed">
+                                        Scikit-learn, SMOTE, n8n</p>
+                                    <p class="text-gray-400 text-sm font-inter leading-relaxed relative z-10">
+                                        Production-ready churn prediction pipeline on the Telco Churn dataset with SMOTE
+                                        for class imbalance (~80% accuracy), automated scheduled inference and reporting
+                                        via n8n cron triggers.
+                                    </p>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between relative z-10 pt-2 border-t border-white/5">
+                                    <span
+                                        class="text-[11px] font-inter text-emerald-500/80 uppercase tracking-wider flex items-center gap-1">
+                                        Hover to flip ⤾
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- BACK OF CARD (EXTENDED DETAILS) -->
+                            <div
+                                class="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] bg-black/95 border border-emerald-500/60 p-7 flex flex-col justify-between overflow-hidden shadow-[0_0_30px_rgba(16,185,129,0.2)]">
+                                <div
+                                    class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(16,185,129,0.1),transparent_70%)] pointer-events-none">
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between mb-2 relative z-10">
+                                        <h4 class="text-lg font-cinzel text-emerald-400">Churn Prediction Pipeline
+                                            &middot; Key Details</h4>
+                                    </div>
+                                    <p class="text-xs font-inter text-gray-300 leading-relaxed relative z-10 mb-4">
+                                        Handled heavy class imbalance using SMOTE oversampling. Automated periodic batch
+                                        scoring and slack alert dispatching via scheduled n8n workflows.
+                                    </p>
+                                    <div
+                                        class="p-3 bg-white/5 border border-white/10 rounded text-[11px] font-inter text-gray-400 space-y-1">
+                                        <div
+                                            class="text-emerald-400 font-semibold uppercase tracking-wider text-[10px]">
+                                            Technical Highlights</div>
+                                        <div>&bull; Built with production-ready architecture</div>
+                                        <div>&bull; Fully automated & scalable workflow</div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between relative z-10 pt-2 border-t border-white/10">
+
+                                    <a href="https://github.com/ITXAli/Customer-Churn-Prediction" target="_blank"
+                                        class="text-emerald-400 text-xs font-inter uppercase tracking-widest hover:text-emerald-300 relative z-10 flex items-center gap-2 w-fit">
+                                        <span>View Source</span>
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                        </svg>
+                                    </a>
+                                    <span class="text-[10px] font-inter text-gray-500 uppercase tracking-wider">
+                                        Flip back ⤿
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Project: Auto-Tagging Tickets -->
+                    <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
+                        <div
+                            class="relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+
+                            <!-- FRONT OF CARD -->
+                            <div
+                                class="absolute inset-0 [backface-visibility:hidden] bg-white/5 border border-white/10 group-hover:border-emerald-500/50 p-7 flex flex-col justify-between overflow-hidden shadow-lg transition-all duration-300">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between mb-2 relative z-10">
+                                        <h4 class="text-xl font-cinzel text-white">Auto-Tagging Tickets</h4>
+
+                                    </div>
+                                    <p
+                                        class="text-[10px] sm:text-xs font-inter text-emerald-400 mb-4 tracking-widest uppercase relative z-10 leading-relaxed">
+                                        LLM, Python</p>
+                                    <p class="text-gray-400 text-sm font-inter leading-relaxed relative z-10">
+                                        Automatically classifies and tags incoming support tickets using an LLM-based
+                                        pipeline, reducing manual triage effort.
+                                    </p>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between relative z-10 pt-2 border-t border-white/5">
+                                    <span
+                                        class="text-[11px] font-inter text-emerald-500/80 uppercase tracking-wider flex items-center gap-1">
+                                        Hover to flip ⤾
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- BACK OF CARD (EXTENDED DETAILS) -->
+                            <div
+                                class="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] bg-black/95 border border-emerald-500/60 p-7 flex flex-col justify-between overflow-hidden shadow-[0_0_30px_rgba(16,185,129,0.2)]">
+                                <div
+                                    class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(16,185,129,0.1),transparent_70%)] pointer-events-none">
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between mb-2 relative z-10">
+                                        <h4 class="text-lg font-cinzel text-emerald-400">Auto-Tagging Tickets &middot;
+                                            Key Details</h4>
+                                    </div>
+                                    <p class="text-xs font-inter text-gray-300 leading-relaxed relative z-10 mb-4">
+                                        Zero-shot classification pipeline parsing customer issues into predefined
+                                        taxonomy tags with high precision and automated routing rules.
+                                    </p>
+                                    <div
+                                        class="p-3 bg-white/5 border border-white/10 rounded text-[11px] font-inter text-gray-400 space-y-1">
+                                        <div
+                                            class="text-emerald-400 font-semibold uppercase tracking-wider text-[10px]">
+                                            Technical Highlights</div>
+                                        <div>&bull; Built with production-ready architecture</div>
+                                        <div>&bull; Fully automated & scalable workflow</div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between relative z-10 pt-2 border-t border-white/10">
+
+                                    <a href="https://github.com/ITXAli/Auto-Tagging-Support-Tickets-Using-LLM"
+                                        target="_blank"
+                                        class="text-emerald-400 text-xs font-inter uppercase tracking-widest hover:text-emerald-300 relative z-10 flex items-center gap-2 w-fit">
+                                        <span>View Source</span>
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                        </svg>
+                                    </a>
+                                    <span class="text-[10px] font-inter text-gray-500 uppercase tracking-wider">
+                                        Flip back ⤿
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Project: Reels Automation -->
+                    <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
+                        <div
+                            class="relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+
+                            <!-- FRONT OF CARD -->
+                            <div
+                                class="absolute inset-0 [backface-visibility:hidden] bg-white/5 border border-white/10 group-hover:border-emerald-500/50 p-7 flex flex-col justify-between overflow-hidden shadow-lg transition-all duration-300">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between mb-2 relative z-10">
+                                        <h4 class="text-xl font-cinzel text-white">Reels Automation</h4>
+
+                                    </div>
+                                    <p
+                                        class="text-[10px] sm:text-xs font-inter text-emerald-400 mb-4 tracking-widest uppercase relative z-10 leading-relaxed">
+                                        n8n, OpenAI, Whisper</p>
+                                    <p class="text-gray-400 text-sm font-inter leading-relaxed relative z-10">
+                                        Automates long-form video repurposing: upload triggers n8n → Whisper transcribes
+                                        audio → OpenAI segments the transcript into short-form hooks → clips
+                                        auto-captioned and queued for Instagram/TikTok.
+                                    </p>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between relative z-10 pt-2 border-t border-white/5">
+                                    <span
+                                        class="text-[11px] font-inter text-emerald-500/80 uppercase tracking-wider flex items-center gap-1">
+                                        Hover to flip ⤾
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- BACK OF CARD (EXTENDED DETAILS) -->
+                            <div
+                                class="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] bg-black/95 border border-emerald-500/60 p-7 flex flex-col justify-between overflow-hidden shadow-[0_0_30px_rgba(16,185,129,0.2)]">
+                                <div
+                                    class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(16,185,129,0.1),transparent_70%)] pointer-events-none">
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between mb-2 relative z-10">
+                                        <h4 class="text-lg font-cinzel text-emerald-400">Reels Automation &middot; Key
+                                            Details</h4>
+                                    </div>
+                                    <p class="text-xs font-inter text-gray-300 leading-relaxed relative z-10 mb-4">
+                                        Automated video clipping pipeline that isolates key hooks, generates animated
+                                        SRT captions, and auto-posts short-form content across channels.
+                                    </p>
+                                    <div
+                                        class="p-3 bg-white/5 border border-white/10 rounded text-[11px] font-inter text-gray-400 space-y-1">
+                                        <div
+                                            class="text-emerald-400 font-semibold uppercase tracking-wider text-[10px]">
+                                            Technical Highlights</div>
+                                        <div>&bull; Built with production-ready architecture</div>
+                                        <div>&bull; Fully automated & scalable workflow</div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between relative z-10 pt-2 border-t border-white/10">
+                                    <span class="text-xs text-gray-500 italic">Internal Client Solution</span>
+                                    <span class="text-[10px] font-inter text-gray-500 uppercase tracking-wider">
+                                        Flip back ⤿
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Project: Image Generation -->
+                    <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
+                        <div
+                            class="relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+
+                            <!-- FRONT OF CARD -->
+                            <div
+                                class="absolute inset-0 [backface-visibility:hidden] bg-white/5 border border-white/10 group-hover:border-emerald-500/50 p-7 flex flex-col justify-between overflow-hidden shadow-lg transition-all duration-300">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between mb-2 relative z-10">
+                                        <h4 class="text-xl font-cinzel text-white">Image Generation</h4>
+
+                                    </div>
+                                    <p
+                                        class="text-[10px] sm:text-xs font-inter text-emerald-400 mb-4 tracking-widest uppercase relative z-10 leading-relaxed">
+                                        n8n, Stable Diffusion, DALL·E</p>
+                                    <p class="text-gray-400 text-sm font-inter leading-relaxed relative z-10">
+                                        Prompt-to-image pipeline: a client brief submitted via webhook is refined by
+                                        GPT-4 and rendered by Stable Diffusion/DALL·E, cutting design turnaround from 2
+                                        days to under 30 minutes.
+                                    </p>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between relative z-10 pt-2 border-t border-white/5">
+                                    <span
+                                        class="text-[11px] font-inter text-emerald-500/80 uppercase tracking-wider flex items-center gap-1">
+                                        Hover to flip ⤾
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- BACK OF CARD (EXTENDED DETAILS) -->
+                            <div
+                                class="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] bg-black/95 border border-emerald-500/60 p-7 flex flex-col justify-between overflow-hidden shadow-[0_0_30px_rgba(16,185,129,0.2)]">
+                                <div
+                                    class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(16,185,129,0.1),transparent_70%)] pointer-events-none">
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between mb-2 relative z-10">
+                                        <h4 class="text-lg font-cinzel text-emerald-400">Image Generation &middot; Key
+                                            Details</h4>
+                                    </div>
+                                    <p class="text-xs font-inter text-gray-300 leading-relaxed relative z-10 mb-4">
+                                        Includes automatic prompt enrichment, negative prompt injection, resolution
+                                        scaling, and cloud storage upload with instant notification hooks.
+                                    </p>
+                                    <div
+                                        class="p-3 bg-white/5 border border-white/10 rounded text-[11px] font-inter text-gray-400 space-y-1">
+                                        <div
+                                            class="text-emerald-400 font-semibold uppercase tracking-wider text-[10px]">
+                                            Technical Highlights</div>
+                                        <div>&bull; Built with production-ready architecture</div>
+                                        <div>&bull; Fully automated & scalable workflow</div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between relative z-10 pt-2 border-t border-white/10">
+                                    <span class="text-xs text-gray-500 italic">Internal Client Solution</span>
+                                    <span class="text-[10px] font-inter text-gray-500 uppercase tracking-wider">
+                                        Flip back ⤿
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Project: Audio Transcriber -->
+                    <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
+                        <div
+                            class="relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+
+                            <!-- FRONT OF CARD -->
+                            <div
+                                class="absolute inset-0 [backface-visibility:hidden] bg-white/5 border border-white/10 group-hover:border-emerald-500/50 p-7 flex flex-col justify-between overflow-hidden shadow-lg transition-all duration-300">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between mb-2 relative z-10">
+                                        <h4 class="text-xl font-cinzel text-white">Audio Transcriber</h4>
+
+                                    </div>
+                                    <p
+                                        class="text-[10px] sm:text-xs font-inter text-emerald-400 mb-4 tracking-widest uppercase relative z-10 leading-relaxed">
+                                        n8n, Whisper API, Google Drive</p>
+                                    <p class="text-gray-400 text-sm font-inter leading-relaxed relative z-10">
+                                        Automated multilingual (Urdu, Arabic, English) transcription: files dropped in
+                                        Google Drive trigger n8n → Whisper API transcribes → formatted transcript saved
+                                        back to Drive and emailed to the client.
+                                    </p>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between relative z-10 pt-2 border-t border-white/5">
+                                    <span
+                                        class="text-[11px] font-inter text-emerald-500/80 uppercase tracking-wider flex items-center gap-1">
+                                        Hover to flip ⤾
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- BACK OF CARD (EXTENDED DETAILS) -->
+                            <div
+                                class="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] bg-black/95 border border-emerald-500/60 p-7 flex flex-col justify-between overflow-hidden shadow-[0_0_30px_rgba(16,185,129,0.2)]">
+                                <div
+                                    class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(16,185,129,0.1),transparent_70%)] pointer-events-none">
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between mb-2 relative z-10">
+                                        <h4 class="text-lg font-cinzel text-emerald-400">Audio Transcriber &middot; Key
+                                            Details</h4>
+                                    </div>
+                                    <p class="text-xs font-inter text-gray-300 leading-relaxed relative z-10 mb-4">
+                                        Supports asynchronous processing of large audio files with multi-language
+                                        detection, speaker diarization, and automated document formatting.
+                                    </p>
+                                    <div
+                                        class="p-3 bg-white/5 border border-white/10 rounded text-[11px] font-inter text-gray-400 space-y-1">
+                                        <div
+                                            class="text-emerald-400 font-semibold uppercase tracking-wider text-[10px]">
+                                            Technical Highlights</div>
+                                        <div>&bull; Built with production-ready architecture</div>
+                                        <div>&bull; Fully automated & scalable workflow</div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between relative z-10 pt-2 border-t border-white/10">
+                                    <span class="text-xs text-gray-500 italic">Internal Client Solution</span>
+                                    <span class="text-[10px] font-inter text-gray-500 uppercase tracking-wider">
+                                        Flip back ⤿
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Project: Rule-Based Chatbot -->
+                    <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
+                        <div
+                            class="relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+
+                            <!-- FRONT OF CARD -->
+                            <div
+                                class="absolute inset-0 [backface-visibility:hidden] bg-white/5 border border-white/10 group-hover:border-emerald-500/50 p-7 flex flex-col justify-between overflow-hidden shadow-lg transition-all duration-300">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between mb-2 relative z-10">
+                                        <h4 class="text-xl font-cinzel text-white">Rule-Based Chatbot</h4>
+
+                                    </div>
+                                    <p
+                                        class="text-[10px] sm:text-xs font-inter text-emerald-400 mb-4 tracking-widest uppercase relative z-10 leading-relaxed">
+                                        Python</p>
+                                    <p class="text-gray-400 text-sm font-inter leading-relaxed relative z-10">
+                                        Early rule-based conversational chatbot project.
+                                    </p>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between relative z-10 pt-2 border-t border-white/5">
+                                    <span
+                                        class="text-[11px] font-inter text-emerald-500/80 uppercase tracking-wider flex items-center gap-1">
+                                        Hover to flip ⤾
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- BACK OF CARD (EXTENDED DETAILS) -->
+                            <div
+                                class="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] bg-black/95 border border-emerald-500/60 p-7 flex flex-col justify-between overflow-hidden shadow-[0_0_30px_rgba(16,185,129,0.2)]">
+                                <div
+                                    class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(16,185,129,0.1),transparent_70%)] pointer-events-none">
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between mb-2 relative z-10">
+                                        <h4 class="text-lg font-cinzel text-emerald-400">Rule-Based Chatbot &middot; Key
+                                            Details</h4>
+                                    </div>
+                                    <p class="text-xs font-inter text-gray-300 leading-relaxed relative z-10 mb-4">
+                                        Built custom regex intent matching and state-tracking state machine for
+                                        deterministic conversational flows.
+                                    </p>
+                                    <div
+                                        class="p-3 bg-white/5 border border-white/10 rounded text-[11px] font-inter text-gray-400 space-y-1">
+                                        <div
+                                            class="text-emerald-400 font-semibold uppercase tracking-wider text-[10px]">
+                                            Technical Highlights</div>
+                                        <div>&bull; Built with production-ready architecture</div>
+                                        <div>&bull; Fully automated & scalable workflow</div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="flex items-center justify-between relative z-10 pt-2 border-t border-white/10">
+
+                                    <a href="https://github.com/ITXAli/Rule-Based-Chatbot" target="_blank"
+                                        class="text-emerald-400 text-xs font-inter uppercase tracking-widest hover:text-emerald-300 relative z-10 flex items-center gap-2 w-fit">
+                                        <span>View Source</span>
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                        </svg>
+                                    </a>
+                                    <span class="text-[10px] font-inter text-gray-500 uppercase tracking-wider">
+                                        Flip back ⤿
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CONTACT SECTION -->
+            <section id="contact" class="scroll-mt-32 scroll-reveal">
+                <div class="flex items-center gap-4 mb-12">
+                    <h3 class="text-4xl font-cinzel text-white">Contact</h3>
+                    <div class="flex-1 h-[1px] bg-white/10 ml-4"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 pb-20 items-start">
+                    <div>
+                        <h4 class="text-3xl font-cinzel text-white mb-6">Partner on High-Impact AI.</h4>
+                        <p class="text-gray-300 font-inter text-lg leading-relaxed">
+                            Available for specialized AI engineering roles, high-stakes system architecture, and
+                            technical advisory. Whether deploying production multi-agent RAG systems or robust machine
+                            learning pipelines, let's connect.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col gap-4 font-inter text-gray-300">
+                        <a href="mailto:aliz200489@gmail.com"
+                            class="flex items-center justify-between p-4 rounded-lg bg-white/5 border border-white/10 hover:border-emerald-500/50 hover:text-emerald-400 transition-all group">
+                            <div class="flex items-center gap-4">
+                                <span
+                                    class="w-10 h-10 rounded bg-white/5 border border-white/10 flex items-center justify-center text-emerald-500 group-hover:scale-110 transition-transform">@</span>
+                                <div>
+                                    <div class="text-[10px] text-gray-500 uppercase tracking-widest font-mono">Email
+                                    </div>
+                                    <div
+                                        class="text-sm md:text-base text-gray-200 group-hover:text-emerald-400 transition-colors">
+                                        aliz200489@gmail.com</div>
+                                </div>
+                            </div>
+                            <span class="text-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+                        </a>
+
+                        <a href="https://www.linkedin.com/in/ali-zafar-a131b8256" target="_blank"
+                            class="flex items-center justify-between p-4 rounded-lg bg-white/5 border border-white/10 hover:border-emerald-500/50 hover:text-emerald-400 transition-all group">
+                            <div class="flex items-center gap-4">
+                                <span
+                                    class="w-10 h-10 rounded bg-white/5 border border-white/10 flex items-center justify-center text-emerald-500 group-hover:scale-110 transition-transform">in</span>
+                                <div>
+                                    <div class="text-[10px] text-gray-500 uppercase tracking-widest font-mono">LinkedIn
+                                    </div>
+                                    <div
+                                        class="text-sm md:text-base text-gray-200 group-hover:text-emerald-400 transition-colors">
+                                        linkedin.com/in/ali-zafar-a131b8256</div>
+                                </div>
+                            </div>
+                            <span class="text-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+                        </a>
+
+                        <a href="https://github.com/ITXAli" target="_blank"
+                            class="flex items-center justify-between p-4 rounded-lg bg-white/5 border border-white/10 hover:border-emerald-500/50 hover:text-emerald-400 transition-all group">
+                            <div class="flex items-center gap-4">
+                                <span
+                                    class="w-10 h-10 rounded bg-white/5 border border-white/10 flex items-center justify-center text-emerald-500 group-hover:scale-110 transition-transform">gh</span>
+                                <div>
+                                    <div class="text-[10px] text-gray-500 uppercase tracking-widest font-mono">GitHub
+                                    </div>
+                                    <div
+                                        class="text-sm md:text-base text-gray-200 group-hover:text-emerald-400 transition-colors">
+                                        github.com/ITXAli</div>
+                                </div>
+                            </div>
+                            <span class="text-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="w-full bg-black border-t border-white/10 py-8 text-center relative z-20">
+        <p class="font-inter text-gray-600 text-sm tracking-widest uppercase">© 2026 Ali Zafar. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        /**
+         * 1. Global Emerald Tracker Glow
+         */
+        const globalGlow = document.getElementById('global-glow');
+
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX;
+            const y = e.clientY;
+
+            globalGlow.style.background = `radial-gradient(circle 600px at ${x}px ${y}px, rgba(16, 185, 129, 0.22), transparent 75%)`;
+            globalGlow.style.opacity = '1';
+        });
+
+        document.addEventListener('mouseleave', () => {
+            globalGlow.style.opacity = '0';
+        });
+
+        /**
+         * 2. Floating Particles Background
+         */
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        let particlesArray = [];
+
+        function initParticles() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particlesArray = [];
+            const numberOfParticles = window.innerWidth < 768 ? 40 : 80;
+
+            for (let i = 0; i < numberOfParticles; i++) {
+                const size = Math.random() * 2 + 0.5;
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                const speedX = (Math.random() - 0.5) * 0.5;
+                const speedY = (Math.random() - 0.5) * 0.5;
+                particlesArray.push({ x, y, size, speedX, speedY });
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'rgba(16, 185, 129, 0.3)'; // Emerald tint for particles
+
+            for (let i = 0; i < particlesArray.length; i++) {
+                let p = particlesArray[i];
+                p.x += p.speedX;
+                p.y += p.speedY;
+
+                if (p.x > canvas.width) p.x = 0;
+                else if (p.x < 0) p.x = canvas.width;
+                if (p.y > canvas.height) p.y = 0;
+                else if (p.y < 0) p.y = canvas.height;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            requestAnimationFrame(animateParticles);
+        }
+
+        window.addEventListener('resize', initParticles);
+        initParticles();
+        animateParticles();
+
+        /**
+         * 3. Scroll Progress Indicator & Scroll Spy
+         */
+        const scrollProgress = document.getElementById('scroll-progress');
+        const sections = document.querySelectorAll('section, header');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            // Scroll Progress Tracker
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            if (scrollProgress) {
+                scrollProgress.style.width = scrolled + "%";
+            }
+
+            // Interactive Navigation Scroll Spy
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                // Offset logic to trigger slightly before the section hits top
+                if (pageYOffset >= sectionTop - (sectionHeight / 3) - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                // Reset states
+                link.classList.remove('text-emerald-400', 'border-emerald-500/50', 'bg-emerald-500/10');
+
+                // Add active state if current
+                if (link.getAttribute('href').includes(current) && current !== '') {
+                    link.classList.add('text-emerald-400', 'border-emerald-500/50', 'bg-emerald-500/10');
+                }
+            });
+        });
+
+        /**
+         * 4. Scroll Reveal Intersection Observer
+         */
+        const revealElements = document.querySelectorAll('.scroll-reveal');
+
+        const revealOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealOnScroll = new IntersectionObserver(function (entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target); // Stop observing once revealed
+                }
+            });
+        }, revealOptions);
+
+        revealElements.forEach(el => {
+            revealOnScroll.observe(el);
+        });
+
+    </script>
+</body>
+
+</html>
