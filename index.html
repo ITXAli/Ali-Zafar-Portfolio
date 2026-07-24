@@ -154,6 +154,14 @@
                 transition: none !important;
             }
 
+            /* Same specificity as the base .card-inner.flipped rule above
+               (two classes), so this wins the cascade tie by source order
+               and actually overrides the rotateY on touch devices. */
+            .card-inner.flipped {
+                -webkit-transform: none !important;
+                transform: none !important;
+            }
+
             .card-inner>div {
                 -webkit-backface-visibility: visible !important;
                 backface-visibility: visible !important;
