@@ -116,19 +116,30 @@
         }
 
         .project-card {
-            transform: translateZ(0);
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
             isolation: isolate;
         }
 
+        /* Desktop hover flip */
+        @media (hover: hover) and (pointer: fine) {
+            .project-card:hover .card-inner {
+                transform: rotateY(180deg);
+            }
+        }
+
+        /* Touch / Tap flip */
         .card-inner.flipped {
             transform: rotateY(180deg) !important;
         }
 
         nav {
-            transform: translateZ(1000px);
+            -webkit-transform: translate3d(0, 0, 1000px);
+            transform: translate3d(0, 0, 1000px);
             will-change: transform;
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
+            isolation: isolate;
         }
     </style>
 </head>
@@ -389,7 +400,7 @@
                     <!-- Project: SehatHub -->
                     <div class="project-card scroll-reveal group [perspective:1000px] h-[360px] sm:h-[340px]">
                         <div
-                            class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                            class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d]">
 
                             <!-- FRONT OF CARD -->
                             <div
@@ -471,7 +482,7 @@
                     <!-- Project: Advocate AI -->
                     <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
                         <div
-                            class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                            class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d]">
 
                             <!-- FRONT OF CARD -->
                             <div
@@ -551,7 +562,7 @@
                     <!-- Project: Audio Denoiser -->
                     <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
                         <div
-                            class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                            class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d]">
 
                             <!-- FRONT OF CARD -->
                             <div
@@ -629,7 +640,7 @@
                     <!-- Project: AI WhatsApp Bot -->
                     <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
                         <div
-                            class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                            class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d]">
 
                             <!-- FRONT OF CARD -->
                             <div
@@ -700,7 +711,7 @@
                     <!-- Project: CV Shortlister -->
                     <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
                         <div
-                            class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                            class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d]">
 
                             <!-- FRONT OF CARD -->
                             <div
@@ -770,7 +781,7 @@
                     <!-- Project: Market Signal Pipeline -->
                     <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
                         <div
-                            class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                            class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d]">
 
                             <!-- FRONT OF CARD -->
                             <div
@@ -840,7 +851,7 @@
                     <!-- Project: Stock Trend Forecaster -->
                     <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
                         <div
-                            class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                            class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d]">
 
                             <!-- FRONT OF CARD -->
                             <div
@@ -919,7 +930,7 @@
                     <!-- Project: BERT News Classifier -->
                     <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
                         <div
-                            class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                            class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d]">
 
                             <!-- FRONT OF CARD -->
                             <div
@@ -997,7 +1008,7 @@
                     <!-- Project: Churn Prediction Pipeline -->
                     <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
                         <div
-                            class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                            class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d]">
 
                             <!-- FRONT OF CARD -->
                             <div
@@ -1075,7 +1086,7 @@
                     <!-- Project: Auto-Tagging Tickets -->
                     <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
                         <div
-                            class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                            class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d]">
 
                             <!-- FRONT OF CARD -->
                             <div
@@ -1153,7 +1164,7 @@
                     <!-- Project: Reels Automation -->
                     <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
                         <div
-                            class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                            class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d]">
 
                             <!-- FRONT OF CARD -->
                             <div
@@ -1223,7 +1234,7 @@
                     <!-- Project: Image Generation -->
                     <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
                         <div
-                            class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                            class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d]">
 
                             <!-- FRONT OF CARD -->
                             <div
@@ -1293,7 +1304,7 @@
                     <!-- Project: Audio Transcriber -->
                     <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
                         <div
-                            class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                            class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d]">
 
                             <!-- FRONT OF CARD -->
                             <div
@@ -1363,7 +1374,7 @@
                     <!-- Project: Rule-Based Chatbot -->
                     <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
                         <div
-                            class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                            class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d]">
 
                             <!-- FRONT OF CARD -->
                             <div
