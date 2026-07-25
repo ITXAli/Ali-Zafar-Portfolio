@@ -144,6 +144,10 @@
         @media (hover: none) and (pointer: coarse) {
             .project-card {
                 perspective: none !important;
+                /* Contain this card's layout/paint so the layer promotion
+                   below (needed for the opacity crossfade) can never bleed
+                   into a recalculation of the fixed nav's box. */
+                contain: layout paint style;
             }
 
             .card-inner {
@@ -168,6 +172,14 @@
                 -webkit-transform: none !important;
                 transform: none !important;
                 transition: opacity 0.35s ease, visibility 0.35s ease;
+                /* Pre-promote this element to its own GPU compositing layer
+                   at page load instead of lazily on the first transition.
+                   Lazy layer creation is what triggers WebKit's fixed-position
+                   mis-placement bug — paying that cost upfront, off the
+                   interaction path, is what actually fixes the header jump. */
+                will-change: opacity, visibility;
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0);
             }
 
             /* Back face sits on top, hidden until flipped */
@@ -448,7 +460,7 @@
                 <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
 
                     <!-- Project: SehatHub -->
-                    <div class="project-card scroll-reveal group [perspective:1000px] h-[360px] sm:h-[340px]">
+                    <div class="project-card scroll-reveal group [perspective:1000px] h-[400px] sm:h-[380px]">
                         <div
                             class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d]">
 
@@ -504,9 +516,11 @@
                                         class="p-3 bg-white/5 border border-white/10 rounded text-[11px] font-inter text-gray-400 space-y-1">
                                         <div
                                             class="text-emerald-400 font-semibold uppercase tracking-wider text-[10px]">
-                                            Technical Highlights</div>
-                                        <div>&bull; Built with production-ready architecture</div>
-                                        <div>&bull; Fully automated & scalable workflow</div>
+                                            Engineering Highlights</div>
+                                        <div>&bull; Engineered a modular FastAPI backend with React-based frontend architecture.</div>
+                                        <div>&bull; Integrated multimodal Gemma 4 pipelines for medical reasoning and voice-driven interactions.</div>
+                                        <div>&bull; Orchestrated AI services through asynchronous API workflows for low-latency inference.</div>
+                                        <div>&bull; Designed reusable service components to accelerate feature development during the hackathon.</div>
                                     </div>
                                 </div>
                                 <div
@@ -530,7 +544,7 @@
                     </div>
 
                     <!-- Project: Advocate AI -->
-                    <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
+                    <div class="project-card scroll-reveal group [perspective:1000px] h-[400px] sm:h-[380px]">
                         <div
                             class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d]">
 
@@ -584,9 +598,11 @@
                                         class="p-3 bg-white/5 border border-white/10 rounded text-[11px] font-inter text-gray-400 space-y-1">
                                         <div
                                             class="text-emerald-400 font-semibold uppercase tracking-wider text-[10px]">
-                                            Technical Highlights</div>
-                                        <div>&bull; Built with production-ready architecture</div>
-                                        <div>&bull; Fully automated & scalable workflow</div>
+                                            Engineering Highlights</div>
+                                        <div>&bull; Architected a multi-agent LangGraph workflow with state-aware orchestration.</div>
+                                        <div>&bull; Implemented Hybrid GraphRAG using Qdrant vector search and Neo4j knowledge graphs.</div>
+                                        <div>&bull; Optimized legal retrieval with semantic search and relationship-aware reasoning.</div>
+                                        <div>&bull; Exposed AI agents through scalable FastAPI endpoints for real-time inference.</div>
                                     </div>
                                 </div>
                                 <div
@@ -610,7 +626,7 @@
                     </div>
 
                     <!-- Project: Audio Denoiser -->
-                    <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
+                    <div class="project-card scroll-reveal group [perspective:1000px] h-[400px] sm:h-[380px]">
                         <div
                             class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d]">
 
@@ -663,7 +679,7 @@
                                         class="p-3 bg-white/5 border border-white/10 rounded text-[11px] font-inter text-gray-400 space-y-1">
                                         <div
                                             class="text-emerald-400 font-semibold uppercase tracking-wider text-[10px]">
-                                            Technical Highlights</div>
+                                            Engineering Highlights</div>
                                         <div>&bull; Deep U-Net convolutional noise suppression</div>
                                         <div>&bull; High SNR improvement for speech inputs</div>
                                     </div>
@@ -688,7 +704,7 @@
                         </div>
                     </div>
                     <!-- Project: AI WhatsApp Bot -->
-                    <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
+                    <div class="project-card scroll-reveal group [perspective:1000px] h-[400px] sm:h-[380px]">
                         <div
                             class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d]">
 
@@ -741,9 +757,11 @@
                                         class="p-3 bg-white/5 border border-white/10 rounded text-[11px] font-inter text-gray-400 space-y-1">
                                         <div
                                             class="text-emerald-400 font-semibold uppercase tracking-wider text-[10px]">
-                                            Technical Highlights</div>
-                                        <div>&bull; Built with production-ready architecture</div>
-                                        <div>&bull; Fully automated & scalable workflow</div>
+                                            Engineering Highlights</div>
+                                        <div>&bull; Designed an event-driven automation pipeline using n8n and Twilio webhooks.</div>
+                                        <div>&bull; Implemented AI-powered intent classification with dynamic response generation.</div>
+                                        <div>&bull; Automated ticket synchronization with Airtable for centralized customer management.</div>
+                                        <div>&bull; Built intelligent routing logic with sentiment-aware escalation workflows.</div>
                                     </div>
                                 </div>
                                 <div
@@ -759,7 +777,7 @@
                     </div>
 
                     <!-- Project: CV Shortlister -->
-                    <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
+                    <div class="project-card scroll-reveal group [perspective:1000px] h-[400px] sm:h-[380px]">
                         <div
                             class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d]">
 
@@ -811,9 +829,11 @@
                                         class="p-3 bg-white/5 border border-white/10 rounded text-[11px] font-inter text-gray-400 space-y-1">
                                         <div
                                             class="text-emerald-400 font-semibold uppercase tracking-wider text-[10px]">
-                                            Technical Highlights</div>
-                                        <div>&bull; Built with production-ready architecture</div>
-                                        <div>&bull; Fully automated & scalable workflow</div>
+                                            Engineering Highlights</div>
+                                        <div>&bull; Automated end-to-end candidate screening through event-driven n8n workflows.</div>
+                                        <div>&bull; Implemented AI-based resume parsing and job-description semantic matching.</div>
+                                        <div>&bull; Integrated Gmail, OpenAI, and Google Sheets into a unified recruitment pipeline.</div>
+                                        <div>&bull; Reduced manual screening through automated scoring and ranking logic.</div>
                                     </div>
                                 </div>
                                 <div
@@ -829,7 +849,7 @@
                     </div>
 
                     <!-- Project: Market Signal Pipeline -->
-                    <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
+                    <div class="project-card scroll-reveal group [perspective:1000px] h-[400px] sm:h-[380px]">
                         <div
                             class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d]">
 
@@ -881,9 +901,11 @@
                                         class="p-3 bg-white/5 border border-white/10 rounded text-[11px] font-inter text-gray-400 space-y-1">
                                         <div
                                             class="text-emerald-400 font-semibold uppercase tracking-wider text-[10px]">
-                                            Technical Highlights</div>
-                                        <div>&bull; Built with production-ready architecture</div>
-                                        <div>&bull; Fully automated & scalable workflow</div>
+                                            Engineering Highlights</div>
+                                        <div>&bull; Developed a real-time market intelligence pipeline for continuous sentiment processing.</div>
+                                        <div>&bull; Combined VADER NLP with financial indicators for feature-rich model inputs.</div>
+                                        <div>&bull; Automated inference delivery through Flask APIs with zero-touch execution.</div>
+                                        <div>&bull; Designed modular ETL workflows supporting continuous data ingestion.</div>
                                     </div>
                                 </div>
                                 <div
@@ -899,7 +921,7 @@
                     </div>
 
                     <!-- Project: Stock Trend Forecaster -->
-                    <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
+                    <div class="project-card scroll-reveal group [perspective:1000px] h-[400px] sm:h-[380px]">
                         <div
                             class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d]">
 
@@ -951,9 +973,11 @@
                                         class="p-3 bg-white/5 border border-white/10 rounded text-[11px] font-inter text-gray-400 space-y-1">
                                         <div
                                             class="text-emerald-400 font-semibold uppercase tracking-wider text-[10px]">
-                                            Technical Highlights</div>
-                                        <div>&bull; Built with production-ready architecture</div>
-                                        <div>&bull; Fully automated & scalable workflow</div>
+                                            Engineering Highlights</div>
+                                        <div>&bull; Engineered a hybrid forecasting pipeline combining NLP sentiment and market data.</div>
+                                        <div>&bull; Built advanced feature engineering workflows for financial time-series prediction.</div>
+                                        <div>&bull; Optimized XGBoost inference behind a RESTful Flask deployment.</div>
+                                        <div>&bull; Delivered real-time prediction services through an interactive analytics interface.</div>
                                     </div>
                                 </div>
                                 <div
@@ -978,7 +1002,7 @@
                     </div>
 
                     <!-- Project: BERT News Classifier -->
-                    <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
+                    <div class="project-card scroll-reveal group [perspective:1000px] h-[400px] sm:h-[380px]">
                         <div
                             class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d]">
 
@@ -1030,9 +1054,11 @@
                                         class="p-3 bg-white/5 border border-white/10 rounded text-[11px] font-inter text-gray-400 space-y-1">
                                         <div
                                             class="text-emerald-400 font-semibold uppercase tracking-wider text-[10px]">
-                                            Technical Highlights</div>
-                                        <div>&bull; Built with production-ready architecture</div>
-                                        <div>&bull; Fully automated & scalable workflow</div>
+                                            Engineering Highlights</div>
+                                        <div>&bull; Fine-tuned bert-base-uncased on the AG News corpus with custom tokenization and dynamic attention masking.</div>
+                                        <div>&bull; Tuned learning rate schedules and batch sizing to stabilize convergence on a 4-class objective.</div>
+                                        <div>&bull; Benchmarked against baseline TF-IDF and LSTM classifiers to validate transformer gains (~94% accuracy).</div>
+                                        <div>&bull; Packaged inference as a lightweight, reusable scoring module for downstream routing tasks.</div>
                                     </div>
                                 </div>
                                 <div
@@ -1056,7 +1082,7 @@
                     </div>
 
                     <!-- Project: Churn Prediction Pipeline -->
-                    <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
+                    <div class="project-card scroll-reveal group [perspective:1000px] h-[400px] sm:h-[380px]">
                         <div
                             class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d]">
 
@@ -1108,9 +1134,11 @@
                                         class="p-3 bg-white/5 border border-white/10 rounded text-[11px] font-inter text-gray-400 space-y-1">
                                         <div
                                             class="text-emerald-400 font-semibold uppercase tracking-wider text-[10px]">
-                                            Technical Highlights</div>
-                                        <div>&bull; Built with production-ready architecture</div>
-                                        <div>&bull; Fully automated & scalable workflow</div>
+                                            Engineering Highlights</div>
+                                        <div>&bull; Applied SMOTE oversampling to correct severe class imbalance in the Telco Churn dataset.</div>
+                                        <div>&bull; Engineered behavioral and tenure-based features to improve model separability.</div>
+                                        <div>&bull; Automated retraining and scheduled inference via n8n cron triggers for hands-off reporting.</div>
+                                        <div>&bull; Validated model performance with precision/recall tracking tuned for imbalanced churn detection.</div>
                                     </div>
                                 </div>
                                 <div
@@ -1134,7 +1162,7 @@
                     </div>
 
                     <!-- Project: Auto-Tagging Tickets -->
-                    <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
+                    <div class="project-card scroll-reveal group [perspective:1000px] h-[400px] sm:h-[380px]">
                         <div
                             class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d]">
 
@@ -1185,9 +1213,11 @@
                                         class="p-3 bg-white/5 border border-white/10 rounded text-[11px] font-inter text-gray-400 space-y-1">
                                         <div
                                             class="text-emerald-400 font-semibold uppercase tracking-wider text-[10px]">
-                                            Technical Highlights</div>
-                                        <div>&bull; Built with production-ready architecture</div>
-                                        <div>&bull; Fully automated & scalable workflow</div>
+                                            Engineering Highlights</div>
+                                        <div>&bull; Built an LLM-based classification layer to auto-tag inbound tickets by category and urgency.</div>
+                                        <div>&bull; Designed prompt templates with few-shot examples to improve tagging consistency.</div>
+                                        <div>&bull; Integrated the pipeline into an existing ticketing workflow with minimal manual override.</div>
+                                        <div>&bull; Reduced triage latency by routing tagged tickets directly to the correct queue.</div>
                                     </div>
                                 </div>
                                 <div
@@ -1212,7 +1242,7 @@
                     </div>
 
                     <!-- Project: Reels Automation -->
-                    <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
+                    <div class="project-card scroll-reveal group [perspective:1000px] h-[400px] sm:h-[380px]">
                         <div
                             class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d]">
 
@@ -1264,9 +1294,11 @@
                                         class="p-3 bg-white/5 border border-white/10 rounded text-[11px] font-inter text-gray-400 space-y-1">
                                         <div
                                             class="text-emerald-400 font-semibold uppercase tracking-wider text-[10px]">
-                                            Technical Highlights</div>
-                                        <div>&bull; Built with production-ready architecture</div>
-                                        <div>&bull; Fully automated & scalable workflow</div>
+                                            Engineering Highlights</div>
+                                        <div>&bull; Orchestrated a Whisper transcription step to extract accurate timestamps for clip segmentation.</div>
+                                        <div>&bull; Used OpenAI to identify high-engagement hooks within long-form transcripts.</div>
+                                        <div>&bull; Automated caption generation and clip export through a chained n8n workflow.</div>
+                                        <div>&bull; Queued finished assets directly for Instagram/TikTok publishing with zero manual editing.</div>
                                     </div>
                                 </div>
                                 <div
@@ -1282,7 +1314,7 @@
                     </div>
 
                     <!-- Project: Image Generation -->
-                    <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
+                    <div class="project-card scroll-reveal group [perspective:1000px] h-[400px] sm:h-[380px]">
                         <div
                             class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d]">
 
@@ -1334,9 +1366,11 @@
                                         class="p-3 bg-white/5 border border-white/10 rounded text-[11px] font-inter text-gray-400 space-y-1">
                                         <div
                                             class="text-emerald-400 font-semibold uppercase tracking-wider text-[10px]">
-                                            Technical Highlights</div>
-                                        <div>&bull; Built with production-ready architecture</div>
-                                        <div>&bull; Fully automated & scalable workflow</div>
+                                            Engineering Highlights</div>
+                                        <div>&bull; Built a webhook-triggered n8n pipeline connecting client briefs to image generation models.</div>
+                                        <div>&bull; Used GPT-4 to refine raw briefs into structured, model-ready prompts.</div>
+                                        <div>&bull; Routed prompts to Stable Diffusion and DALL·E for comparative output generation.</div>
+                                        <div>&bull; Cut design turnaround from roughly two days to under thirty minutes end-to-end.</div>
                                     </div>
                                 </div>
                                 <div
@@ -1352,7 +1386,7 @@
                     </div>
 
                     <!-- Project: Audio Transcriber -->
-                    <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
+                    <div class="project-card scroll-reveal group [perspective:1000px] h-[400px] sm:h-[380px]">
                         <div
                             class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d]">
 
@@ -1404,9 +1438,11 @@
                                         class="p-3 bg-white/5 border border-white/10 rounded text-[11px] font-inter text-gray-400 space-y-1">
                                         <div
                                             class="text-emerald-400 font-semibold uppercase tracking-wider text-[10px]">
-                                            Technical Highlights</div>
-                                        <div>&bull; Built with production-ready architecture</div>
-                                        <div>&bull; Fully automated & scalable workflow</div>
+                                            Engineering Highlights</div>
+                                        <div>&bull; Automated multilingual (Urdu, Arabic, English) transcription via the Whisper API.</div>
+                                        <div>&bull; Triggered the pipeline directly from Google Drive file uploads with n8n watch nodes.</div>
+                                        <div>&bull; Formatted and stored transcripts back to Drive with automatic client email delivery.</div>
+                                        <div>&bull; Handled language detection and routing without any manual file handling.</div>
                                     </div>
                                 </div>
                                 <div
@@ -1422,7 +1458,7 @@
                     </div>
 
                     <!-- Project: Rule-Based Chatbot -->
-                    <div class="project-card scroll-reveal group [perspective:1000px] h-[340px]">
+                    <div class="project-card scroll-reveal group [perspective:1000px] h-[400px] sm:h-[380px]">
                         <div
                             class="card-inner relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d]">
 
@@ -1472,9 +1508,11 @@
                                         class="p-3 bg-white/5 border border-white/10 rounded text-[11px] font-inter text-gray-400 space-y-1">
                                         <div
                                             class="text-emerald-400 font-semibold uppercase tracking-wider text-[10px]">
-                                            Technical Highlights</div>
-                                        <div>&bull; Built with production-ready architecture</div>
-                                        <div>&bull; Fully automated & scalable workflow</div>
+                                            Engineering Highlights</div>
+                                        <div>&bull; Designed a rule-based intent matching system using structured pattern rules.</div>
+                                        <div>&bull; Implemented a decision-tree dialogue flow for deterministic conversation handling.</div>
+                                        <div>&bull; Built as a foundational project to contrast rule-based logic against later LLM-driven agents.</div>
+                                        <div>&bull; Focused on predictable, explainable responses for constrained conversational scope.</div>
                                     </div>
                                 </div>
                                 <div
